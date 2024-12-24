@@ -16,8 +16,8 @@ sealed class BottomNavItem(
         icon = Icons.Default.Search,
     )
     object Favorite : BottomNavItem(
-        title = "Saved",
-        route = "saved",
+        title = "Favorite",
+        route = "favorite",
         icon = Icons.Default.Favorite,
     )
 }

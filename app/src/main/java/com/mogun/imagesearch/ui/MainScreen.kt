@@ -77,6 +77,9 @@ fun BottomNavigationBar(navHostController: NavHostController, currentRoute: Stri
                         contentDescription = item.title,
                     )
                 },
+                label = {
+                    Text(text = item.title)
+                }
             )
         }
     }
