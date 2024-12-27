@@ -1,4 +1,4 @@
-package com.mogun.imagesearch.ui
+package com.mogun.imagesearch.ui.favorite
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
