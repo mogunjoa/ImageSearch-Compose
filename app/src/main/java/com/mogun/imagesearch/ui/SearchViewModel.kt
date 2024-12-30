@@ -23,7 +23,7 @@ class SearchViewModel(): ViewModel() {
     private val _imageSearchState = MutableStateFlow<UiState<KakaoImageSearchResponse>>(UiState.Empty)
     val imageSearchState: StateFlow<UiState<KakaoImageSearchResponse>> = _imageSearchState.asStateFlow()
 
-    fun searchImages(query: String, sort: String = "accuracy", page: Int = 1, size: Int = 10) {
+    fun searchImages(query: String, sort: String = "accuracy", page: Int = 1, size: Int = 20) {
         viewModelScope.launch {
             searchRepository.searchImages(query, sort, page, size)
                 .onStart {
