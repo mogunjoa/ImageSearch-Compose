@@ -1,15 +1,12 @@
 package com.mogun.imagesearch.ui.common
 
-import android.widget.ImageButton
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -27,10 +24,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.mogun.imagesearch.R
+import com.mogun.imagesearch.data.ImageDocument
 
 @Composable
-fun ImageCard() {
+fun ImageCard(
+    imageDocument: ImageDocument
+) {
     Card(
         colors = CardDefaults.cardColors(Color.White),
         shape = RoundedCornerShape(4.dp),
@@ -43,14 +44,16 @@ fun ImageCard() {
             modifier = Modifier.padding(10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                contentDescription = "이미지",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.height(50.dp).aspectRatio(1f / 2f)
+            AsyncImage(
+                model = imageDocument.imageUrl,
+                contentDescription = "Network Image",
+                placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
+                error = painterResource(id = R.drawable.baseline_error_24),
+                modifier = Modifier.size(50.dp),
+                contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.width(10.dp))
-            Text("이미지 카드입니다.")
+            Text(imageDocument.displaySiteName)
             Spacer(modifier = Modifier.weight(1f))
             IconButton(
                 onClick = {
@@ -72,9 +75,6 @@ fun ImageCardPreview() {
     Column(
         modifier = Modifier.background(Color.White)
     ) {
-        ImageCard()
-        ImageCard()
-        ImageCard()
-        ImageCard()
+
     }
 }
