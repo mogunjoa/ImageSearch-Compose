@@ -3,20 +3,14 @@
 package com.mogun.imagesearch.ui
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -32,11 +26,10 @@ fun MainScreen() {
     val navHostController = rememberNavController()
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    val viewModel = SearchViewModel()
 
     Scaffold(
         topBar = {
-            MainHeader(viewModel)
+            MainHeader()
         },
         bottomBar = {
             BottomNavigationBar(navHostController, currentRoute)
@@ -47,26 +40,19 @@ fun MainScreen() {
             startDestination = BottomNavItem.Search.route,
             modifier = Modifier.padding(it)
         ) {
-            composable(BottomNavItem.Search.route) { SearchScreen(viewModel) }
+            composable(BottomNavItem.Search.route) { SearchScreen() }
             composable(BottomNavItem.Favorite.route) { FavoriteScreen() }
         }
     }
 }
 
 @Composable
-fun MainHeader(viewModel: SearchViewModel) {
+fun MainHeader() {
     TopAppBar(
         title = {
             Text("모근조아의 이미지 검색")
         },
-        actions = {
-            IconButton(onClick = {
-                viewModel.searchImages("강아지")
-                println("검색 버튼 클릭")
-            }) {
-                Icon(imageVector = Icons.Default.Search, contentDescription = "검색")
-            }
-        }
+        actions = {}
     )
 }
 
